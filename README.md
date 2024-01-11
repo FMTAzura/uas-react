@@ -23,6 +23,15 @@ export default {
     tsconfigRootDir: __dirname,
   },
 }
+
+{
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["swagger-ui-react", ...],
+    // ...
+  },
+  // ...
+}
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
