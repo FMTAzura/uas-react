@@ -1,0 +1,440 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API untuk manajemen tugas harian (ToDo).",
+    "version": "1.0.0",
+    "title": "ToDo API",
+    "contact": {
+      "email": "your-email@example.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operasi terkait pengguna"
+    },
+    {
+      "name": "day",
+      "description": "Operasi terkait hari"
+    },
+    {
+      "name": "activity",
+      "description": "Operasi terkait aktivitas"
+    }
+  ],
+  "schemes": [
+    "https://alwaysme.vercel.app/"
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Melakukan login pengguna",
+        "description": "",
+        "operationId": "loginUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data login pengguna",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login berhasil"
+          },
+          "401": {
+            "description": "Login gagal"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Mengambil daftar pengguna",
+        "description": "",
+        "operationId": "getUsers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar pengguna berhasil diambil"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Mengambil detail pengguna berdasarkan ID",
+        "description": "",
+        "operationId": "getUserById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID pengguna yang akan diambil",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detail pengguna berhasil diambil"
+          },
+          "404": {
+            "description": "Pengguna tidak ditemukan"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Mengupdate pengguna berdasarkan ID",
+        "description": "",
+        "operationId": "updateUserById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID pengguna yang akan diupdate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data pengguna yang akan diupdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pengguna berhasil diupdate"
+          },
+          "404": {
+            "description": "Pengguna tidak ditemukan"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Menghapus pengguna berdasarkan ID",
+        "description": "",
+        "operationId": "deleteUserById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID pengguna yang akan dihapus",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pengguna berhasil dihapus"
+          },
+          "404": {
+            "description": "Pengguna tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/days": {
+      "get": {
+        "tags": [
+          "day"
+        ],
+        "summary": "Mengambil daftar hari",
+        "description": "",
+        "operationId": "getDays",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar hari berhasil diambil"
+          }
+        }
+      }
+    },
+    "/days/{dayId}": {
+      "post": {
+        "tags": [
+          "day"
+        ],
+        "summary": "Mengambil detail hari berdasarkan ID",
+        "description": "",
+        "operationId": "getDayById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dayId",
+            "in": "path",
+            "description": "ID hari yang akan diambil",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detail hari berhasil diambil"
+          },
+          "404": {
+            "description": "Hari tidak ditemukan"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "day"
+        ],
+        "summary": "Mengupdate hari berdasarkan ID",
+        "description": "",
+        "operationId": "updateDayById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dayId",
+            "in": "path",
+            "description": "ID hari yang akan diupdate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data hari yang akan diupdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Day"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hari berhasil diupdate"
+          },
+          "404": {
+            "description": "Hari tidak ditemukan"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "day"
+        ],
+        "summary": "Menghapus hari berdasarkan ID",
+        "description": "",
+        "operationId": "deleteDayById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "dayId",
+            "in": "path",
+            "description": "ID hari yang akan dihapus",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hari berhasil dihapus"
+          },
+          "404": {
+            "description": "Hari tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/activities": {
+      "get": {
+        "tags": [
+          "activity"
+        ],
+        "summary": "Mengambil daftar aktivitas",
+        "description": "",
+        "operationId": "getActivities",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar aktivitas berhasil diambil"
+          }
+        }
+      }
+    },
+    "/activities/{activityId}": {
+      "post": {
+        "tags": [
+          "activity"
+        ],
+        "summary": "Mengambil detail aktivitas berdasarkan ID",
+        "description": "",
+        "operationId": "getActivityById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "ID aktivitas yang akan diambil",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detail aktivitas berhasil diambil"
+          },
+          "404": {
+            "description": "Aktivitas tidak ditemukan"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "activity"
+        ],
+        "summary": "Mengupdate aktivitas berdasarkan ID",
+        "description": "",
+        "operationId": "updateActivityById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "ID aktivitas yang akan diupdate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data aktivitas yang akan diupdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aktivitas berhasil diupdate"
+          },
+          "404": {
+            "description": "Aktivitas tidak ditemukan"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "activity"
+        ],
+        "summary": "Menghapus aktivitas berdasarkan ID",
+        "description": "",
+        "operationId": "deleteActivityById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "ID aktivitas yang akan diupdate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data aktivitas yang akan diupdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aktivitas berhasil diupdate"
+          },
+          "404": {
+            "description": "Aktivitas tidak ditemukan"
+          }
+        }
+      }
+    }
+  }
+}
