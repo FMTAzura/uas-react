@@ -37,7 +37,7 @@ const UsersTable: React.FC = () => {
     navigate(`edit/${userId}`);
   };
 
-  const handleDelete = ((userId)=>{
+  const handleDelete = ((userId: number)=>{
     if(window.confirm('Are you sure you want to delete this user?')) {
       axios.delete(`https://alwaysme.vercel.app/users/${userId}`, {
         headers: {

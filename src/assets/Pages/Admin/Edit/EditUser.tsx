@@ -27,7 +27,7 @@ function EditUser() {
     }
   }, []); // Menghapus [navigate] karena tidak diperlukan
 
-  const editAction = async (e) => {
+  const editAction = async (e: any) => {
     e.preventDefault();
     const userId = localStorage.getItem('userId');
     try {

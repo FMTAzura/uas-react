@@ -16,7 +16,7 @@ function LoginComponent() {
     }
   }, [navigate]);
 
-  const loginAction = async (e) => {
+  const loginAction = async (e: any) => {
     e.preventDefault();
     var data = new FormData();
     data.append('email', email);

@@ -125,7 +125,7 @@ const ActivitiesTable: React.FC = () => {
               />
               <Checkbox
                 className="ml-2"
-                label="Selesai"
+                id="done"
                 checked={newActivity.done}
                 onChange={() => setNewActivity({ ...newActivity, done: !newActivity.done })}
               />

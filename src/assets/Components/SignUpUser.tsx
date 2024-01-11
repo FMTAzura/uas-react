@@ -17,7 +17,7 @@ function RegisterComponent() {
     }
   }, [navigate]);
 
-  const registerAction = async (e) => {
+  const registerAction = async (e: any) => {
     e.preventDefault();
     var data = new FormData();
     data.append('name', name);
