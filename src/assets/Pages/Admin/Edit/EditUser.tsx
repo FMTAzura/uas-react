@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Button, Label, TextInput } from 'flowbite-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams,NavLink } from 'react-router-dom';
 import axios from 'axios';
+import React from 'react';
 
 function EditUser() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { userId } = useParams();
 
   useEffect(() => {
-    const statusEdit = localStorage.getItem('edit');
-    console.log(statusEdit);
-    if (statusEdit === 'true') {
-      const userId = localStorage.getItem('userId');
+    const storedAuth: string | null = localStorage.getItem('auth');
+    const statusAuth: boolean | false = (storedAuth !== null) && (storedAuth === 'true');
+    if (statusAuth)
+    {
       axios
         .get(`https://alwaysme.vercel.app/users/${userId}`)
         .then((response) => {
@@ -24,26 +26,34 @@ function EditUser() {
         .catch((error) => {
           console.log(error);
         });
+    }else {
+      localStorage.removeItem('auth');
+      navigate('/login');
     }
-  }, []); // Menghapus [navigate] karena tidak diperlukan
+  }, [navigate,userId]); // Menghapus [navigate] karena tidak diperlukan
 
-  const editAction = async (e: any) => {
+  const editAction = async (e: React.FormEvent) => {
     e.preventDefault();
-    const userId = localStorage.getItem('userId');
+    const formData = new FormData();
+    formData.append('name',name);
+    formData.append('email',email);
+    formData.append('password',password);
     try {
-      await axios.put(`https://alwaysme.vercel.app/users/${userId}`, {
-        name,
-        email,
-        password, // Tetap menyertakan password walaupun biasanya tidak ditampilkan
+      await axios.put(`https://alwaysme.vercel.app/users/${userId}`,formData,{
+        headers: {
+          'Content-Type' : 'multipart/form-data'
+        }
       });
-      navigate('/users');
+      navigate('/user');
     } catch (error) {
+      alert('Gagal memperbaharui data users!')
       console.log(error);
     }
   }
 
   return (
     <form className="flex max-w-md flex-col gap-4" onSubmit={editAction}>
+      <NavLink to={'/user'} className={'bg-slate-400 py-2 px-4 block w-fit rounded-md text-white font-semibold'}>Kembali</NavLink>
       <div>
         <div className="mb-2 block">
           <Label htmlFor="name" value="Your name" />
@@ -54,6 +64,7 @@ function EditUser() {
           placeholder="name"
           value={name} // Menambahkan prop 'value' untuk menampilkan nilai yang sedang di-edit
           required
+          maxLength={20}
           onChange={(e) => setName(e.target.value)}
         />
       </div>

@@ -1,6 +1,6 @@
 import { Button, Label, TextInput } from 'flowbite-react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function LoginComponent() {
@@ -16,9 +16,9 @@ function LoginComponent() {
     }
   }, [navigate]);
 
-  const loginAction = async (e: any) => {
+  const loginAction = async (e: React.FormEvent) => {
     e.preventDefault();
-    var data = new FormData();
+    const data = new FormData();
     data.append('email', email);
     data.append('password', password);
     try {
